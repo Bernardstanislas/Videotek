@@ -12,38 +12,40 @@ public class Movie {
     public static final String LIST_ALL = "listAll";
 
     @Id
-    @GeneratedValue(strategy=GenerationType.TABLE)
-    private long id;
+    private int id;
 
-    private String title;
+    private MovieStatus status;
 
     public Movie() {
+        this.status = MovieStatus.WAITING;
     }
 
-    public Movie(final String title) {
-        this.title = title;
+    public Movie(final int id) {
+        this.id = id;
+        this.status = MovieStatus.WAITING;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(final long id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public MovieStatus getStatus() {
+        return status;
     }
 
-    public void setTitle(final String title) {
-        this.title = title;
+    public void setStatus(final MovieStatus status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
         return "Movie{" +
-                "title='" + title + '\'' +
+                "id='" + id + '\'' +
+                "status='" + status + '\'' +
                 '}';
     }
 

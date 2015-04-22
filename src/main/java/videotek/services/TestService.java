@@ -19,7 +19,7 @@ public class TestService {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("in.memory.test");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        final Movie movie = new Movie("Titre de film lol");
+        final Movie movie = new Movie(1);
         entityManager.getTransaction().begin();
         entityManager.persist(movie);
         entityManager.getTransaction().commit();
