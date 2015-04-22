@@ -1,14 +1,11 @@
 package main.java.videotek.services;
 
 import main.java.videotek.model.Movie;
-import main.java.videotek.utils.JsonTransformer;
+import yts.YtsClient;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-
-import static spark.Spark.get;
 
 /**
  * Created by stan on 06/04/15.
@@ -24,10 +21,10 @@ public class TestService {
         entityManager.persist(movie);
         entityManager.getTransaction().commit();
 
-        get("/movies", "application/json", (request, response) -> {
-            TypedQuery<Movie> query = entityManager.createQuery(
-                    "SELECT m FROM Movie AS m", Movie.class);
-            return query.getResultList();
-        }, new JsonTransformer());
+        final YtsClient client = new YtsClient.Builder()
+                .withMovies()
+                .build();
+
+        final MovieService movieService = new MovieService(client);
     }
 }
