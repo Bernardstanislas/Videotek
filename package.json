@@ -1,0 +1,28 @@
+{
+  "name": "videotek",
+  "version": "0.0.1",
+  "description": "Videotek",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bernardstanislas/Videotek.git"
+  },
+  "author": "Stanislas Bernard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bernardstanislas/Videotek/issues"
+  },
+  "homepage": "https://github.com/Bernardstanislas/Videotek",
+  "dependencies": {
+    "express": "^4.13.1",
+    "sqlite3": "^3.0.9"
+  },
+  "devDependencies": {
+    "brunch": "^1.8.3",
+    "eslint": "^0.24.1",
+    "eslint-plugin-react": "^2.7.0"
+  }
+}
