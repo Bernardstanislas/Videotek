@@ -1,25 +1,47 @@
 exports.config = {
   sourceMaps: false,
+  /*npm: {
+    enabled: true
+  },*/
   paths: {
-    'public': '../server/static/'
+    "public": './server/static/'
   },
+  // server:{
+  //   path: './scripts/start_tomcat.js'
+  // },
   files: {
         javascripts: {
             joinTo: {
                 'javascripts/app.js': /^client/,
-                'javascripts/vendor.js': /^(bower_components|vendor|node_modules)/
+                'javascripts/vendor.js': /^client\/vendor/
             },
-            order: {
-                before: [
-                    'client/vendor/react.js',
-                    'client/vendor/focus.js'
-                ]
-            }
+            // order: {
+            //     before: [
+            //         'vendor/npo.js',
+            //         'vendor/react.js',
+            //         'vendor/jquery.js',
+            //         'vendor/lodash.js',
+            //         'vendor/backbone.js',
+            //         'vendor/bootstrap.js',
+            //         'vendor/material.js',
+            //         'vendor/ripples.js',
+            //         'vendor/focus.js',
+            //         'vendor/focus-components.js',
+            //         'vendor/moment.min.js',
+            //         'vendor/daterangepicker.js'
+            //     ],
+            //     after: ['vendor/picker.js']
+            // }
         },
         stylesheets: {
             joinTo: 'stylesheets/app.css',
             order: {
-                before: []
+                before: [
+                    // 'app/styles/font.scss',
+                    // 'vendor/bootstrap.css',
+                    // 'vendor/material.css',
+                    // 'vendor/ripples.css',
+                ]
             }
         },
         templates: {
@@ -52,7 +74,7 @@ exports.config = {
         },
         browserSync: {
             port: 8080,
-            logLevel: 'debug'
+            logLevel: "debug"
         }
     }
 };

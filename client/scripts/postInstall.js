@@ -1,33 +1,30 @@
 var fs = require('fs');
-var vendor = './vendor/';
+var vendor = __dirname + '/../vendor/';
+var nodeModules = __dirname + '/../../node_modules/';
+var fontsDir = __dirname + '../app/assets/fonts/';
 
 var files = [
   'react/dist/react.js'
 ];
 
-
 var fonts = [];
-
 
 //Copy dependencies (js / css)
 files.map(function(path){
   var splitedPath = path.split('/');
   var pth = splitedPath[splitedPath.length - 1];
-  console.log(splitedPath, pth);
-  fs.createReadStream('../node_modules/' + path)
+  fs.createReadStream(nodeModules + path)
     .pipe(
       fs.createWriteStream(vendor + pth)
     );
 });
 
-
 //Copy assets (fonts, images)
 fonts.map(function(path){
   var splitedPath = path.split('/');
   var pth = splitedPath[splitedPath.length - 1];
-  console.log(splitedPath, pth);
-  fs.createReadStream('../node_modules/' + path)
+  fs.createReadStream(nodeModules + path)
     .pipe(
-      fs.createWriteStream('./app/assets/fonts/' + pth)
+      fs.createWriteStream(fontsDir + pth)
     );
 });
