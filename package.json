@@ -20,7 +20,8 @@
   "dependencies": {
     "express": "^4.13.1",
     "react": "^0.13.3",
-    "sqlite3": "^3.0.9"
+    "sqlite3": "^3.0.9",
+    "webtorrent": "^0.53.0"
   },
   "devDependencies": {
     "babel-brunch": "^5.1.2",

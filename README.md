@@ -1,7 +1,7 @@
 Videotek
 ========
 
-A project to make the link between [YIFY torrents](https://yts.to/browse-movies), [Transmission client](http://www.transmissionbt.com/) and [Plex Media Server](https://plex.tv/).
+A project to make the link between [YIFY torrents](https://yts.to/browse-movies) and [Plex Media Server](https://plex.tv/), using [WebTorrent](https://github.com/feross/webtorrent) as a torrent client.
 
 Plex media center
 -----------------
@@ -32,3 +32,12 @@ Then you get the following answer :
     ...
 </MediaContainer>
 ```
+
+Architecture
+------------
+
+The back office lays on a [SQLite database](https://www.sqlite.org/), containing both the already owned movies from Plex, and the available movies from YIFY.
+
+The available movie list is refreshed through the [YIFY API](https://yts.to/api), with plain HTTP calls.
+
+The movies are then downloaded with WebTorrent, and sent to the Plex media folder, watched by the Plex media center itslef that will refresh the Plex database upon movie arrival.
