@@ -1,11 +1,20 @@
 {
   "name": "videotek",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Videotek",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node client/scripts/postInstall.js"
+    "lint": "eslint server/src",
+    "test": "npm run lint && mocha $npm_package_options_mocha",
+    "testonly": "mocha $npm_package_options_mocha",
+    "postinstall": "node client/scripts/postInstall.js",
+    "build": "rm -rf server/dist/* && gulp babel",
+    "watch": "gulp watch",
+    "cover": "babel-node node_modules/.bin/isparta cover --root server/src --report html node_modules/.bin/_mocha -- $npm_package_options_mocha",
+    "coveralls": "babel-node node_modules/.bin/isparta cover --root server/src --report lcovonly node_modules/.bin/_mocha -- $npm_package_options_mocha && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "options": {
+    "mocha": "--require scripts/mocha-bootload server/src/**/__tests__/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -18,16 +27,21 @@
   },
   "homepage": "https://github.com/Bernardstanislas/Videotek",
   "dependencies": {
+    "babel": "^5.8.5",
     "express": "^4.13.1",
     "react": "^0.13.3",
     "sqlite3": "^3.0.9",
     "webtorrent": "^0.53.0"
   },
   "devDependencies": {
+    "babel": "^5.8.5",
     "babel-eslint": "^4.0.0",
+    "chai": "^3.2.0",
+    "chai-subset": "^1.0.1",
     "eslint": "^0.24.1",
     "eslint-plugin-react": "^2.7.0",
     "gulp": "^3.9.0",
-    "gulp-babel": "^5.1.0"
+    "gulp-babel": "^5.1.0",
+    "mocha": "^2.2.5"
   }
 }
