@@ -1,4 +1,4 @@
 **/node_modules
 **/vendor
-server/dist/**/*.js
+server/dist
 coverage
