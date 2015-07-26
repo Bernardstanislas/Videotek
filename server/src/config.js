@@ -1,8 +1,6 @@
-let config = {
+export const config = {
     sqlite: {
         path: ':memory:',
         verbose: true
     }
 };
-
-module.exports = config;

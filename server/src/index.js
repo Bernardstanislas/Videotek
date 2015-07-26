@@ -1,3 +1,3 @@
-let database = require('./database/index.js');
+import {init as initDatabase} from './database';
 
-database.init();
+initDatabase();
