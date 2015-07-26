@@ -1,11 +1,22 @@
+// Dependencies
+
+import {sqlite3} from 'sqlite3';
+
 // Modules
 
-let init = require('./init.js');
+import {sqlite as config} from './config';
+import {schema} from './schema';
 
-/**
- * Database object
- * @type {Object}
- */
-let database = {init};
+if (config.verbose) {
+    sqlite3.verbose();
+}
 
-module.exports = database;
+let db = new sqlite3.Database(config.path);
+
+let initSchema = (database) => {
+    ['movies', 'torrents', 'genres', 'movieGenre'].map((table) => database.run(schema[table]));
+};
+
+export function init() {
+    db.serialize(() => initSchema(db));
+}
