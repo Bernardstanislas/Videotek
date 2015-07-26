@@ -24,12 +24,10 @@
     "webtorrent": "^0.53.0"
   },
   "devDependencies": {
-    "babel-brunch": "^5.1.2",
-    "brunch": "^1.8.3",
-    "css-brunch": "^1.7.0",
+    "babel-eslint": "^4.0.0",
     "eslint": "^0.24.1",
     "eslint-plugin-react": "^2.7.0",
-    "react-brunch": "^1.0.9",
-    "sass-brunch": "^1.8.10"
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0"
   }
 }
