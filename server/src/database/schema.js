@@ -1,4 +1,4 @@
-let schema = {
+export const schema = {
     movies: `CREATE TABLE IF NOT EXISTS movies
                     (
                         id INTEGER PRIMARY KEY,
@@ -55,5 +55,3 @@ let schema = {
                     )
     `
 };
-
-module.exports = schema;
