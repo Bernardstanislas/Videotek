@@ -4,7 +4,7 @@ import Promise from 'bluebird';
 import 'babel-polyfill';
 
 PouchDB.plugin(require('pouchdb-find'));
-PouchDB.debug.enable('*');
+PouchDB.debug.disable('*');
 const MOVIES_PER_PAGE = 50;
 const YTS_API = 'https://yts.ag/api/v2/';
 
