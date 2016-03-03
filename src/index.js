@@ -2,18 +2,16 @@
 
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
-import {getMovie, getAllMovies, refresh} from './database';
+import {getMovie, getFirstMovies, refresh} from './database';
 
 class App extends Component {
     state = {movie: {}, movieCount: 0};
 
     componentDidMount() {
-        getMovie('10')
-        .then(movie => {
-            getAllMovies()
-            .then(movies => movies.total_rows)
-            .then(movieCount => this.setState({movie, movieCount}))
-        })
+        getMovie('5161')
+        .then(movie => this.setState({movie}));
+        getFirstMovies()
+        .then(movies => console.log('First movies', movies));
     }
 
     render() {
