@@ -4,6 +4,8 @@ import {Provider} from 'react-redux';
 import store from './store';
 import Root from './components';
 import Devtools from './components/devtools';
+import './transmission';
+
 
 const App = (
     <Provider store={store}>

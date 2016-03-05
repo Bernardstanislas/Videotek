@@ -1,3 +1,5 @@
+import {promisify} from 'bluebird';
+
 const S4 = function() {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 };
@@ -19,7 +21,7 @@ const Transmission = function(options) {
 
 };
 
-Transmission.prototype.set = function(ids, options, callback) {
+Transmission.prototype.set = promisify(function(ids, options, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     const args = {ids: ids};
 
@@ -44,20 +46,20 @@ Transmission.prototype.set = function(ids, options, callback) {
         callback(err);
     });
 
-};
+});
 
-Transmission.prototype.add = function(path, options, callback) {
+Transmission.prototype.add = promisify(function(path, options, callback) {
     // for retro-compatibility with old function
     this.addUrl(path, options, callback);
-};
+});
 
-Transmission.prototype.addUrl = function(url, options, callback) {
+Transmission.prototype.addUrl = promisify(function(url, options, callback) {
     const args = {};
     args.filename = url;
     this.addTorrentDataSrc(args, options, callback);
-};
+});
 
-Transmission.prototype.addTorrentDataSrc = function(args, options, callback) {
+Transmission.prototype.addTorrentDataSrc = promisify(function(args, options, callback) {
     if ( typeof options === 'function') {
         callback = options;
     } else {
@@ -81,9 +83,9 @@ Transmission.prototype.addTorrentDataSrc = function(args, options, callback) {
         const torrent = result['torrent-duplicate'] ? result['torrent-duplicate']: result['torrent-added'];
         callback(err, torrent);
     });
-};
+});
 
-Transmission.prototype.remove = function(ids, del, callback) {
+Transmission.prototype.remove = promisify(function(ids, del, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     if ( typeof del === 'function') {
         callback = del;
@@ -98,9 +100,9 @@ Transmission.prototype.remove = function(ids, del, callback) {
         tag: uuid()
     };
     this.callServer(options, callback);
-};
+});
 
-Transmission.prototype.move = function(ids, location, move, callback) {
+Transmission.prototype.move = promisify(function(ids, location, move, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     if ( typeof move === 'function') {
         callback = move;
@@ -116,9 +118,9 @@ Transmission.prototype.move = function(ids, location, move, callback) {
         tag: uuid()
     };
     this.callServer(options, callback);
-};
+});
 
-Transmission.prototype.get = function(ids, callback) {
+Transmission.prototype.get = promisify(function(ids, callback) {
     const options = {
         arguments: {
             fields: this.methods.torrents.fields,
@@ -137,9 +139,9 @@ Transmission.prototype.get = function(ids, callback) {
 
     this.callServer(options, callback);
     return this;
-};
+});
 
-Transmission.prototype.peers = function(ids, callback) {
+Transmission.prototype.peers = promisify(function(ids, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     const options = {
         arguments: {
@@ -157,9 +159,9 @@ Transmission.prototype.peers = function(ids, callback) {
         callback(null, result.torrents);
     });
     return this;
-};
+});
 
-Transmission.prototype.files = function(ids, callback) {
+Transmission.prototype.files = promisify(function(ids, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     const options = {
         arguments: {
@@ -177,9 +179,9 @@ Transmission.prototype.files = function(ids, callback) {
         callback(null, result.torrents);
     });
     return this;
-};
+});
 
-Transmission.prototype.fast = function(ids, callback) {
+Transmission.prototype.fast = promisify(function(ids, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     const options = {
         arguments: {
@@ -196,9 +198,9 @@ Transmission.prototype.fast = function(ids, callback) {
         callback(null, result.torrents);
     });
     return this;
-};
+});
 
-Transmission.prototype.stop = function(ids, callback) {
+Transmission.prototype.stop = promisify(function(ids, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     this.callServer({
         arguments: {
@@ -208,16 +210,16 @@ Transmission.prototype.stop = function(ids, callback) {
         tag: uuid()
     }, callback);
     return this;
-};
+});
 
-Transmission.prototype.stopAll = function(callback) {
+Transmission.prototype.stopAll = promisify(function(callback) {
     this.callServer({
         method: this.methods.torrents.stop
     }, callback);
     return this;
-};
+});
 
-Transmission.prototype.start = function(ids, callback) {
+Transmission.prototype.start = promisify(function(ids, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     this.callServer({
         arguments: {
@@ -227,16 +229,16 @@ Transmission.prototype.start = function(ids, callback) {
         tag: uuid()
     }, callback);
     return this;
-};
+});
 
-Transmission.prototype.startAll = function(callback) {
+Transmission.prototype.startAll = promisify(function(callback) {
     this.callServer({
         method: this.methods.torrents.start
     }, callback);
     return this;
-};
+});
 
-Transmission.prototype.startNow = function(ids, callback) {
+Transmission.prototype.startNow = promisify(function(ids, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     this.callServer({
         arguments: {
@@ -246,9 +248,9 @@ Transmission.prototype.startNow = function(ids, callback) {
         tag: uuid()
     }, callback);
     return this;
-};
+});
 
-Transmission.prototype.verify = function(ids, callback) {
+Transmission.prototype.verify = promisify(function(ids, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     this.callServer({
         arguments: {
@@ -258,9 +260,9 @@ Transmission.prototype.verify = function(ids, callback) {
         tag: uuid()
     }, callback);
     return this;
-};
+});
 
-Transmission.prototype.reannounce = function(ids, callback) {
+Transmission.prototype.reannounce = promisify(function(ids, callback) {
     ids = Array.isArray(ids) ? ids: [ids];
     this.callServer({
         arguments: {
@@ -270,9 +272,9 @@ Transmission.prototype.reannounce = function(ids, callback) {
         tag: uuid()
     }, callback);
     return this;
-};
+});
 
-Transmission.prototype.all = function(callback) {
+Transmission.prototype.all = promisify(function(callback) {
     this.callServer({
         arguments: {
             fields: this.methods.torrents.fields
@@ -281,9 +283,9 @@ Transmission.prototype.all = function(callback) {
         tag: uuid()
     }, callback);
     return this;
-};
+});
 
-Transmission.prototype.active = function(callback) {
+Transmission.prototype.active = promisify(function(callback) {
     const options = {
         arguments: {
             fields: this.methods.torrents.fields,
@@ -294,9 +296,9 @@ Transmission.prototype.active = function(callback) {
     };
     this.callServer(options, callback);
     return this;
-};
+});
 
-Transmission.prototype.session = function(data, callback) {
+Transmission.prototype.session = promisify(function(data, callback) {
     let options = {};
     if ( typeof data !== 'function') {
         const keys = Object.keys(data);
@@ -323,15 +325,15 @@ Transmission.prototype.session = function(data, callback) {
     }
     this.callServer(options, data);
     return this;
-};
+});
 
-Transmission.prototype.sessionStats = function(callback) {
+Transmission.prototype.sessionStats = promisify(function(callback) {
     const options = {
         method: this.methods.session.stats,
         tag: uuid()
     };
     this.callServer(options, callback);
-};
+});
 
 Transmission.prototype.callServer = async function(query, callBack) {
     const self = this;

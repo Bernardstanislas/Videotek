@@ -5,4 +5,7 @@ const rpc = new Transmission({
     port: 80
 });
 
+rpc.sessionStats()
+.then(console.log.bind(console));
+
 export const addUrl = rpc.addUrl.bind(rpc);
