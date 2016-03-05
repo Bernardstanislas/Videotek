@@ -1,10 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {refreshDatabase} from '../actions';
+import {updateFirstMovies} from '../actions';
+import {getFirstMovies} from '../database';
+
+const loadFirstMovies = dispatch => () => {
+    getFirstMovies()
+    .then(movies => dispatch(updateFirstMovies(movies)));
+}
 
 const Root = ({dispatch}) => (
     <div>
-        <button onClick={() => dispatch(refreshDatabase())}>Refresh database</button>
+        <button onClick={loadFirstMovies(dispatch)}>Load first movies</button>
     </div>
 );
 

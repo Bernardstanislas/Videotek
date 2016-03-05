@@ -7,6 +7,8 @@ const rpc = new Transmission({
     port: 80
 });
 
+export default rpc;
+
 // // Update transmission status every 5s
 // setInterval(() => {
 //     rpc.sessionStats()

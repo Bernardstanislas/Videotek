@@ -16,3 +16,6 @@ export const refreshDatabase = () => dispatch => {
 
 export const REFRESH_TRANSMISSION_STATUS = 'REFRESH_TRANSMISSION_STATUS';
 export const refreshTransmissionStatus = status => ({type: REFRESH_TRANSMISSION_STATUS, status});
+
+export const UPDATE_FIRST_MOVIES = 'UPDATE_FIRST_MOVIES';
+export const updateFirstMovies = movies => ({type: UPDATE_FIRST_MOVIES, movies});

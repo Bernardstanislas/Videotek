@@ -40,13 +40,13 @@ const getAllMovies = () => db.allDocs({
 
 const getFirstMovies = async () => {
     await db.createIndex({
-        index: {fields: ['title']}
+        index: {fields: ['date_uploaded_unix']}
     });
     return await db.find({
-        selector: {title: {$gt: null}},
-        sort: ['title'],
-        limit: 5
-    });
+        selector: {date_uploaded_unix: {$gt: null}},
+        sort: [{date_uploaded_unix: 'desc'}],
+        limit: 10
+    }).then(({docs}) => docs);
 }
 
 module.exports = {
