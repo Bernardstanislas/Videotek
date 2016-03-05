@@ -13,3 +13,6 @@ export const refreshDatabase = () => dispatch => {
     refresh()
     .then(() => dispatch(endDatabaseRefresh()));
 }
+
+export const REFRESH_TRANSMISSION_STATUS = 'REFRESH_TRANSMISSION_STATUS';
+export const refreshTransmissionStatus = status => ({type: REFRESH_TRANSMISSION_STATUS, status});
