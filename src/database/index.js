@@ -2,6 +2,9 @@ import fetch from 'isomorphic-fetch';
 import PouchDB from 'pouchdb';
 import Promise from 'bluebird';
 import 'babel-polyfill';
+import {updateDatabaseRefreshProgress} from '../actions';
+import store from '../store';
+
 
 PouchDB.plugin(require('pouchdb-find'));
 PouchDB.debug.disable('*');
@@ -16,7 +19,7 @@ const refresh = async () => {
     const pagesCount = Math.ceil(movieCount / MOVIES_PER_PAGE);
     const pagesArray = Array.from(Array(pagesCount).keys()); // © @pierr
     const moviesArray = await Promise.mapSeries(pagesArray, async (page) => {
-        console.log(`Fetching page ${page}/${pagesArray.length}`);
+        store.dispatch(updateDatabaseRefreshProgress((page + 1)/pagesArray.length));
         const raw = await fetch(`${YTS_API}list_movies.json?page=${page}&limit=${MOVIES_PER_PAGE}`);
         const {data: {movies}} = await raw.json();
         return movies;
@@ -27,7 +30,6 @@ const refresh = async () => {
         ...movie
     }));
     await db.bulkDocs(moviesBatch);
-    console.log('Database refreshed !');
 }
 
 const getMovie = id => db.get(id)
