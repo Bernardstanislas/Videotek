@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import {getMovie, getFirstMovies, refresh} from './database';
-import {addUrl} from './torrent';
+import {addUrl} from './transmission';
 
 class App extends Component {
     state = {movie: {}, movieCount: 0};

@@ -10,7 +10,7 @@ const _ = require('lodash');
 
 // Local imports
 
-const getAllMovies = require('./database').getAllMovies;
+const getAllMovies = require('../database').getAllMovies;
 
 // Local references
 
