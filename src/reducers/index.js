@@ -3,6 +3,7 @@ import {combineReducers} from 'redux';
 import {BEGIN_DATABASE_REFRESH, END_DATABASE_REFRESH, UPDATE_DATABASE_REFRESH_PROGRESS} from '../actions';
 import {REFRESH_TRANSMISSION_STATUS} from '../actions';
 import {UPDATE_FIRST_MOVIES} from '../actions';
+import {REFRESH_PLEX} from '../actions';
 
 export const DATABASE_STATUS = {IDLE: 'IDLE', REFRESHING: 'REFRESHING'};
 
@@ -37,10 +38,20 @@ const movies = (state = [], action) => {
     }
 }
 
+const plex = (state = [], action) => {
+    switch (action.type) {
+        case REFRESH_PLEX:
+        return action.movies;
+        default:
+        return state;
+    }
+}
+
 const rootReducer = combineReducers({
     database,
     transmission,
-    movies
+    movies,
+    plex
 })
 
 export default rootReducer;

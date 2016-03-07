@@ -1,4 +1,5 @@
-import {refresh} from '../database';
+import {refresh as refreshDb} from '../database';
+import {refresh as refreshPx} from '../plex';
 
 export const BEGIN_DATABASE_REFRESH = 'BEGIN_DATABASE_REFRESH';
 export const END_DATABASE_REFRESH = 'END_DATABASE_REFRESH';
@@ -10,7 +11,7 @@ export const updateDatabaseRefreshProgress = progress => ({type: UPDATE_DATABASE
 
 export const refreshDatabase = () => dispatch => {
     dispatch(beginDatabaseRefresh());
-    refresh()
+    refreshDb()
     .then(() => dispatch(endDatabaseRefresh()));
 }
 
@@ -19,3 +20,9 @@ export const refreshTransmissionStatus = status => ({type: REFRESH_TRANSMISSION_
 
 export const UPDATE_FIRST_MOVIES = 'UPDATE_FIRST_MOVIES';
 export const updateFirstMovies = movies => ({type: UPDATE_FIRST_MOVIES, movies});
+
+export const REFRESH_PLEX = 'REFRESH_PLEX';
+export const refreshPlex = () => dispatch => {
+    refreshPx()
+    .then(movies => dispatch({type: REFRESH_PLEX, movies}))
+}

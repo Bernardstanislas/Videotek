@@ -7,6 +7,7 @@ import Root from './components';
 import Devtools from './components/devtools';
 import './transmission';
 import Transmission from './components/transmission';
+import './plex';
 
 const App = (
     <Provider store={store}>
