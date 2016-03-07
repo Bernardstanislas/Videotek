@@ -10,6 +10,8 @@ const rpc = new Transmission({
 export const refresh = () => rpc.active()
 .then(results => results.torrents)
 
+export const add = rpc.addUrl.bind(rpc)
+
 // // Update transmission status every 5s
 // setInterval(() => {
 //     rpc.sessionStats()

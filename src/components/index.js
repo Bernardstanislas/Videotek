@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router'
 import {updateFirstMovies} from '../actions';
 import {getFirstMovies} from '../database';
-import rpc from '../transmission';
+import {add as addTorrent} from '../transmission';
 
 const loadFirstMovies = dispatch => () => {
     getFirstMovies()
@@ -11,7 +11,7 @@ const loadFirstMovies = dispatch => () => {
 }
 
 const startTorrentDownload = url => {
-    rpc.addUrl(url, {'download-dir': '/data/Videos/Films'});
+    addTorrent(url, {'download-dir': '/data/Videos/Films'});
 }
 
 const Movie = ({medium_cover_image, torrents}) => (
