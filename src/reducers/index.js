@@ -4,6 +4,7 @@ import {BEGIN_DATABASE_REFRESH, END_DATABASE_REFRESH, UPDATE_DATABASE_REFRESH_PR
 import {REFRESH_TRANSMISSION_STATUS} from '../actions';
 import {UPDATE_FIRST_MOVIES} from '../actions';
 import {REFRESH_PLEX} from '../actions';
+import {REFRESH_TORRENTS} from '../actions';
 
 export const DATABASE_STATUS = {IDLE: 'IDLE', REFRESHING: 'REFRESHING'};
 
@@ -47,11 +48,21 @@ const plex = (state = [], action) => {
     }
 }
 
+const torrents = (state = [], action) => {
+    switch (action.type) {
+        case REFRESH_TORRENTS:
+        return action.torrents;
+        default:
+        return state;
+    }
+}
+
 const rootReducer = combineReducers({
     database,
     transmission,
     movies,
-    plex
+    plex,
+    torrents
 })
 
 export default rootReducer;

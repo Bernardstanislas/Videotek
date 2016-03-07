@@ -7,7 +7,8 @@ const rpc = new Transmission({
     port: 80
 });
 
-export default rpc;
+export const refresh = () => rpc.active()
+.then(results => results.torrents)
 
 // // Update transmission status every 5s
 // setInterval(() => {

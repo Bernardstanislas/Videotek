@@ -1,5 +1,6 @@
-import {refresh as refreshDb} from '../database';
-import {refresh as refreshPx} from '../plex';
+import {refresh as databaseRefresh} from '../database';
+import {refresh as plexRefresh} from '../plex';
+import {refresh as torrentsRefresh} from '../transmission';
 
 export const BEGIN_DATABASE_REFRESH = 'BEGIN_DATABASE_REFRESH';
 export const END_DATABASE_REFRESH = 'END_DATABASE_REFRESH';
@@ -11,7 +12,7 @@ export const updateDatabaseRefreshProgress = progress => ({type: UPDATE_DATABASE
 
 export const refreshDatabase = () => dispatch => {
     dispatch(beginDatabaseRefresh());
-    refreshDb()
+    databaseRefresh()
     .then(() => dispatch(endDatabaseRefresh()));
 }
 
@@ -23,6 +24,12 @@ export const updateFirstMovies = movies => ({type: UPDATE_FIRST_MOVIES, movies})
 
 export const REFRESH_PLEX = 'REFRESH_PLEX';
 export const refreshPlex = () => dispatch => {
-    refreshPx()
+    plexRefresh()
     .then(movies => dispatch({type: REFRESH_PLEX, movies}))
+}
+
+export const REFRESH_TORRENTS = 'REFRESH_TORRENTS';
+export const refreshTorrents = () => dispatch => {
+    torrentsRefresh()
+    .then(torrents => dispatch({type: REFRESH_TORRENTS, torrents}))
 }
